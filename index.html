@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thomas B. Njimi Essombe — Cybersecurity Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Syne:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  :root{--green:#1D9E75;--green-dim:#0F6E56;--green-glow:#9FE1CB;--bg:#0d0d0d;--surface:#111;--border:#1a2a1a;--text:#e0ffe0;--muted:#5a8a6a}
+  body{background:var(--bg);color:var(--text);font-family:'Share Tech Mono',monospace;min-height:100vh;padding:2rem 1rem}
+  .port-wrap{max-width:960px;margin:0 auto;background:var(--bg);padding:2.5rem 3rem;border-radius:12px;border:0.5px solid var(--border)}
+  .header{display:flex;align-items:flex-start;justify-content:space-between;gap:2rem;border-bottom:0.5px solid #1c3a1c;padding-bottom:1.5rem;margin-bottom:2rem}
+  .avatar-block{display:flex;align-items:center;gap:1.25rem}
+  .avatar{width:64px;height:64px;border-radius:50%;border:1.5px solid var(--green);background:#0a1a0a;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:22px;font-weight:700;color:var(--green);flex-shrink:0}
+  .name{font-family:'Syne',sans-serif;font-size:22px;font-weight:700;color:#c8ffd4;letter-spacing:.02em}
+  .sub{font-size:12px;color:var(--muted);margin:3px 0 6px}
+  .roles{display:flex;gap:6px;flex-wrap:wrap}
+  .role-tag{background:#0a1e0f;border:0.5px solid var(--green-dim);border-radius:4px;padding:2px 9px;font-size:11px;color:var(--green-glow)}
+  .status-dot{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--muted);white-space:nowrap;padding-top:4px}
+  .dot{width:8px;height:8px;border-radius:50%;background:var(--green);animation:pulse 2s infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+  .section{margin-bottom:2rem}
+  .section-label{font-size:10px;color:var(--muted);letter-spacing:.15em;text-transform:uppercase;margin-bottom:.75rem;display:flex;align-items:center;gap:8px}
+  .section-label::after{content:'';flex:1;height:.5px;background:#1c3a1c}
+  .prompt-line{font-size:12px;color:var(--muted);margin-bottom:6px}
+  .prompt-line span{color:var(--green)}
+  .bio-text{font-size:13px;line-height:1.85;color:#9ab8a4}
+  .stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:2rem}
+  .stat-card{background:#0c1a0e;border:0.5px solid #1c3a1c;border-radius:6px;padding:12px;text-align:center}
+  .stat-num{font-family:'Syne',sans-serif;font-size:22px;font-weight:700;color:var(--green)}
+  .stat-label{font-size:10px;color:var(--muted);margin-top:2px}
+  .exp-list,.proj-list{display:flex;flex-direction:column;gap:10px}
+  .exp-card{background:#0c1a0e;border:0.5px solid #1c3a1c;border-left:2px solid var(--green);border-radius:0 6px 6px 0;padding:12px 14px}
+  .proj-card{background:#0c1a0e;border:0.5px solid #1c3a1c;border-left:2px solid #085041;border-radius:0 6px 6px 0;padding:12px 14px;transition:border-color .15s,background .15s}
+  .proj-card:hover{border-left-color:var(--green);background:#0e1e10}
+  .proj-card.featured{border-left-color:var(--green);border-color:var(--green-dim)}
+  .exp-title,.proj-title{font-family:'Syne',sans-serif;font-size:14px;color:#c8ffd4;font-weight:700;margin-bottom:2px}
+  .exp-company{font-size:11px;color:var(--green);margin-bottom:3px}
+  .exp-date{font-size:10px;color:var(--muted);margin-bottom:5px}
+  .exp-desc,.proj-desc{font-size:12px;color:#7aaa8a;line-height:1.65}
+  .proj-tags{display:flex;gap:5px;margin-top:8px;flex-wrap:wrap}
+  .proj-tag{font-size:9px;padding:2px 7px;border-radius:3px;background:#0a1e0f;border:0.5px solid #1c3a1c;color:var(--green)}
+  .proj-tag.hot{border-color:var(--green);color:var(--green-glow)}
+  .phase-row{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:10px}
+  .phase-box{background:#051a0a;border:0.5px solid #1c3a1c;border-radius:4px;padding:6px 8px;text-align:center}
+  .phase-num{font-size:9px;color:var(--muted);display:block}
+  .phase-label{font-size:10px;color:var(--green-glow);display:block;margin-top:2px}
+  .skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:8px}
+  .skill-card{background:#0c1a0e;border:0.5px solid #1c3a1c;border-radius:6px;padding:11px 13px}
+  .skill-category{font-size:10px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px}
+  .skill-items{font-size:12px;color:var(--green-glow);line-height:1.85}
+  .certs-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:8px}
+  .cert-card{background:#0a1a0e;border:0.5px solid var(--green-dim);border-radius:6px;padding:11px 14px;display:flex;flex-direction:column;gap:3px}
+  .cert-icon{font-size:17px;color:var(--green);margin-bottom:3px}
+  .cert-name{font-size:13px;color:var(--green-glow);font-weight:500}
+  .cert-meta{font-size:10px;color:var(--muted)}
+  .cert-valid{font-size:10px;color:var(--green);margin-top:2px}
+  .cert-badge-row{display:flex;gap:4px;margin-top:6px;flex-wrap:wrap}
+  .cert-tag{font-size:9px;padding:2px 7px;border-radius:3px;background:#0a1e0f;border:0.5px solid #1c3a1c;color:var(--green)}
+  .in-progress{border-color:#3a3a10;background:#1a1a08}
+  .in-progress .cert-name{color:#b8b870}
+  .in-progress .cert-meta{color:#5a5a30}
+  .in-progress .cert-icon{color:#8a8a40}
+  .edu-row{display:flex;flex-direction:column;gap:8px}
+  .edu-item{display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;background:#0c1a0e;border:0.5px solid #1c3a1c;border-radius:6px;padding:10px 13px}
+  .edu-item.current{border-color:var(--green-dim);border-left:2px solid var(--green)}
+  .edu-deg{font-size:13px;color:var(--green-glow);margin-bottom:2px}
+  .edu-school{font-size:11px;color:var(--muted)}
+  .edu-right{font-size:10px;color:var(--green);white-space:nowrap;text-align:right;flex-shrink:0}
+  .edu-badge{font-size:9px;padding:2px 7px;border-radius:3px;background:#051a0a;border:0.5px solid var(--green);color:var(--green);margin-top:4px;display:inline-block}
+  .contact-row{display:flex;gap:10px;flex-wrap:wrap}
+  .contact-btn{display:inline-flex;align-items:center;gap:7px;background:transparent;border:0.5px solid var(--green-dim);border-radius:5px;padding:9px 15px;font-family:'Share Tech Mono',monospace;font-size:12px;color:var(--green-glow);text-decoration:none;transition:background .15s}
+  .contact-btn:hover{background:#0a1e0f}
+  .contact-btn i{font-size:16px}
+  .cursor-blink{display:inline-block;width:8px;height:15px;background:var(--green);vertical-align:middle;margin-left:3px;animation:blink 1s step-end infinite}
+  @keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+  @media(max-width:640px){
+    .port-wrap{padding:1.5rem 1.25rem}
+    .header{flex-direction:column;gap:1rem}
+    .stats-row{grid-template-columns:repeat(2,1fr)}
+    .phase-row{grid-template-columns:repeat(2,1fr)}
+    .certs-grid{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+<div class="port-wrap">
+
+  <div class="header">
+    <div class="avatar-block">
+      <div class="avatar">TN</div>
+      <div>
+        <p class="name">Thomas B. Njimi Essombe<span class="cursor-blink"></span></p>
+        <p class="sub">Addison, TX &nbsp;·&nbsp; Thomas.njimi@gmail.com</p>
+        <div class="roles">
+          <span class="role-tag">SOC Analyst</span>
+          <span class="role-tag">Security Engineer</span>
+          <span class="role-tag">Pentester</span>
+          <span class="role-tag">Cloud Security</span>
+        </div>
+      </div>
+    </div>
+    <div class="status-dot"><div class="dot"></div>open to opportunities</div>
+  </div>
+
+  <div class="stats-row">
+    <div class="stat-card"><div class="stat-num">4+</div><div class="stat-label">years experience</div></div>
+    <div class="stat-card"><div class="stat-num">7</div><div class="stat-label">certifications</div></div>
+    <div class="stat-card"><div class="stat-num">7</div><div class="stat-label">lab projects</div></div>
+    <div class="stat-card"><div class="stat-num">4.8</div><div class="stat-label">CSAT score</div></div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">whoami</div>
+    <p class="prompt-line"><span>~$</span> cat bio.txt</p>
+    <p class="bio-text">SOC Security Analyst with 4+ years of hands-on experience in real-time security monitoring, Level 1 alert triage, incident response, and threat detection across enterprise and cloud environments. Skilled in both offensive and defensive security — conducting full-scope penetration tests, building detection pipelines, and hunting threats before they become incidents. AWS Solutions Architect Professional certified (829/1000). M.S. Cyber Technology candidate at UMGC.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-label">experience</div>
+    <p class="prompt-line"><span>~$</span> cat ./experience/*.log</p>
+    <div class="exp-list">
+      <div class="exp-card">
+        <div class="exp-title">Data Center Technician (Security Focus)</div>
+        <div class="exp-company">Amazon Web Services (AWS) — Garland, TX</div>
+        <div class="exp-date">Aug 2024 – Present</div>
+        <div class="exp-desc">Eyes-on-glass monitoring with 15-min SLA. Level 1 alert triage, incident ticketing, health &amp; availability dashboards, cross-functional escalation coordination.</div>
+      </div>
+      <div class="exp-card">
+        <div class="exp-title">Cloud Support Engineer</div>
+        <div class="exp-company">Amazon Web Services (AWS) — Dallas, TX</div>
+        <div class="exp-date">Apr 2022 – Jul 2024</div>
+        <div class="exp-desc">Resolved 11+ security incidents/week (4.8/5 CSAT). AWS CloudWatch SIEM monitoring, IAM misconfiguration remediation, Python/Bash/PowerShell log analysis automation.</div>
+      </div>
+      <div class="exp-card">
+        <div class="exp-title">Security Analyst</div>
+        <div class="exp-company">Pani Digital Services, LLC — Beltsville, MD</div>
+        <div class="exp-date">Jan 2017 – Oct 2018</div>
+        <div class="exp-desc">Real-time SIEM monitoring, 20+ alerts/week triage, Nessus scans across 500+ endpoints. Reduced false-positives by 10% via SIEM correlation rule refinement.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">projects</div>
+    <p class="prompt-line"><span>~$</span> ls ./projects/</p>
+    <div class="proj-list">
+      <div class="proj-card featured">
+        <div class="proj-title">⚡ Full-Scope Penetration Test — Capstone</div>
+        <div class="proj-desc">Executed a complete, professionally documented penetration test across four structured phases for ITSY-2372 capstone. Applied industry-standard methodology from scoping through reporting — covering recon, service enumeration, vulnerability validation, and exploitation with ethical guidelines.</div>
+        <div class="phase-row">
+          <div class="phase-box"><span class="phase-num">Phase 1</span><span class="phase-label">Recon</span></div>
+          <div class="phase-box"><span class="phase-num">Phase 2</span><span class="phase-label">Enumeration</span></div>
+          <div class="phase-box"><span class="phase-num">Phase 3</span><span class="phase-label">Exploitation</span></div>
+          <div class="phase-box"><span class="phase-num">Phase 4</span><span class="phase-label">Reporting</span></div>
+        </div>
+        <div class="proj-tags" style="margin-top:10px">
+          <span class="proj-tag hot">Nmap</span><span class="proj-tag hot">Nikto</span><span class="proj-tag hot">enum4linux</span><span class="proj-tag hot">Dirb</span><span class="proj-tag hot">SSH Enum</span><span class="proj-tag hot">Kali Linux</span><span class="proj-tag hot">Pentest Report</span><span class="proj-tag hot">Risk Assessment</span>
+        </div>
+      </div>
+      <div class="proj-card">
+        <div class="proj-title">APT Simulation &amp; Network Forensics</div>
+        <div class="proj-desc">Captured and analyzed live network traffic to identify C2 beaconing, SMTP-based data exfiltration, and IOCs consistent with an Advanced Persistent Threat. Identified compromised host (192.168.1.96) and documented full attack timeline.</div>
+        <div class="proj-tags"><span class="proj-tag">Wireshark</span><span class="proj-tag">APT</span><span class="proj-tag">C2 Detection</span><span class="proj-tag">SMTP Exfil</span><span class="proj-tag">IOC Analysis</span></div>
+      </div>
+      <div class="proj-card">
+        <div class="proj-title">Host-Based Monitoring &amp; Packet Analysis</div>
+        <div class="proj-desc">Performed host-based monitoring and deep packet inspection on TCP/TLS and QUIC traffic. Analyzed RDP sessions, DNS queries, and encrypted comms to distinguish normal activity from anomalous IOCs.</div>
+        <div class="proj-tags"><span class="proj-tag">Wireshark</span><span class="proj-tag">TLS/QUIC</span><span class="proj-tag">RDP</span><span class="proj-tag">DNS</span><span class="proj-tag">Host Monitoring</span></div>
+      </div>
+      <div class="proj-card">
+        <div class="proj-title">Cyber Kill Chain — BioGenX Breach Analysis</div>
+        <div class="proj-desc">Mapped a simulated enterprise breach to the Lockheed Martin Cyber Kill Chain. Analyzed spear-phishing delivery, lateral movement, and persistence. Produced a structured incident report with remediation recommendations.</div>
+        <div class="proj-tags"><span class="proj-tag">Kill Chain</span><span class="proj-tag">Threat Analysis</span><span class="proj-tag">Spear-Phishing</span><span class="proj-tag">MITRE ATT&amp;CK</span></div>
+      </div>
+      <div class="proj-card">
+        <div class="proj-title">Systems Hardening Plan — CISO Simulation</div>
+        <div class="proj-desc">As simulated CISO of BioGenX Corp, developed a full systems hardening strategy for remote manufacturing facilities following a Phantom Phoenix APT attack. Included Group Policy hardening, cyber resilience frameworks, and remote facility controls.</div>
+        <div class="proj-tags"><span class="proj-tag">Group Policy</span><span class="proj-tag">Systems Hardening</span><span class="proj-tag">Cyber Resilience</span><span class="proj-tag">CISO Strategy</span></div>
+      </div>
+      <div class="proj-card">
+        <div class="proj-title">XSS Exploitation Lab — Burp Suite</div>
+        <div class="proj-desc">Performed reflected XSS attacks across multiple HTML contexts (body, title, HTML comments, multiline tags) using Burp Suite and FoxyProxy. Demonstrated context-aware payload crafting and URL-encoded script injection.</div>
+        <div class="proj-tags"><span class="proj-tag">Burp Suite</span><span class="proj-tag">XSS</span><span class="proj-tag">Kali Linux</span><span class="proj-tag">Web App Security</span><span class="proj-tag">Offensive</span></div>
+      </div>
+      <div class="proj-card">
+        <div class="proj-title">SDLC Security &amp; Traffic Baseline Study</div>
+        <div class="proj-desc">Captured network traffic during normal and simulated attack scenarios to establish a security baseline aligned with SDLC documentation requirements. Analyzed RDP, DNS, OCSP, and Azure VM agent traffic patterns.</div>
+        <div class="proj-tags"><span class="proj-tag">SDLC</span><span class="proj-tag">Wireshark</span><span class="proj-tag">RDP</span><span class="proj-tag">Azure</span><span class="proj-tag">Baseline Analysis</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">skills</div>
+    <p class="prompt-line"><span>~$</span> ls ./skills/</p>
+    <div class="skills-grid">
+      <div class="skill-card"><div class="skill-category">SIEM &amp; SOC</div><div class="skill-items">Microsoft Sentinel<br>AWS CloudWatch<br>KQL · Splunk<br>Log Analysis · IOC</div></div>
+      <div class="skill-card"><div class="skill-category">Offensive</div><div class="skill-items">Nmap · Nikto<br>Burp Suite · dirb<br>enum4linux<br>XSS · Web App</div></div>
+      <div class="skill-card"><div class="skill-category">Threat Intel</div><div class="skill-items">MITRE ATT&amp;CK<br>Threat Hunting<br>IOC Correlation<br>Incident Response</div></div>
+      <div class="skill-card"><div class="skill-category">Networking</div><div class="skill-items">TCP/IP · DNS<br>Firewalls · IDS/IPS<br>VLANs · ACLs<br>PCAP · QUIC</div></div>
+      <div class="skill-card"><div class="skill-category">Cloud</div><div class="skill-items">AWS IAM/EC2<br>Azure Security<br>Entra ID<br>Cloud Misconfig</div></div>
+      <div class="skill-card"><div class="skill-category">Scripting</div><div class="skill-items">Python<br>Bash / Shell<br>PowerShell<br>Log Parsing</div></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">certifications</div>
+    <p class="prompt-line"><span>~$</span> cat ./certs.json</p>
+    <div class="certs-grid">
+      <div class="cert-card"><i class="ti ti-shield-check cert-icon"></i><div class="cert-name">CompTIA CSAP</div><div class="cert-meta">Security Analytics Professional</div><div class="cert-valid">Issued Apr 21, 2026</div><div class="cert-badge-row"><span class="cert-tag">Stackable</span><span class="cert-tag">Security+ | CySA+</span></div></div>
+      <div class="cert-card"><i class="ti ti-shield-check cert-icon"></i><div class="cert-name">CompTIA CySA+</div><div class="cert-meta">CS0-003 · Threat &amp; Behavior Analytics</div><div class="cert-valid">Valid through Jun 11, 2027</div><div class="cert-badge-row"><span class="cert-tag">Threat Detection</span></div></div>
+      <div class="cert-card"><i class="ti ti-shield-check cert-icon"></i><div class="cert-name">CompTIA Security+</div><div class="cert-meta">SY0-701 · Baseline Security</div><div class="cert-valid">Valid through Apr 21, 2029</div><div class="cert-badge-row"><span class="cert-tag">Core Security</span></div></div>
+      <div class="cert-card"><i class="ti ti-cloud cert-icon"></i><div class="cert-name">AWS Solutions Architect</div><div class="cert-meta">Professional (SAP-C02)</div><div class="cert-valid">Valid through Nov 26, 2027</div><div class="cert-badge-row"><span class="cert-tag">Score: 829/1000</span><span class="cert-tag">Cloud Arch</span></div></div>
+      <div class="cert-card"><i class="ti ti-network cert-icon"></i><div class="cert-name">Cisco CCNA</div><div class="cert-meta">Cisco Certified Network Associate</div><div class="cert-valid">Valid through May 26, 2028</div><div class="cert-badge-row"><span class="cert-tag">Networking</span><span class="cert-tag">ID: CSCO14926040</span></div></div>
+      <div class="cert-card in-progress"><i class="ti ti-clock cert-icon"></i><div class="cert-name">AZ-500 · SC-200 · SC-300</div><div class="cert-meta">Microsoft Azure Security</div><div class="cert-valid" style="color:#8a8a40">In Progress — 2026</div><div class="cert-badge-row"><span class="cert-tag" style="color:#8a8a40;border-color:#3a3a10">Upcoming</span></div></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">education</div>
+    <p class="prompt-line"><span>~$</span> cat ./education.txt</p>
+    <div class="edu-row">
+      <div class="edu-item current">
+        <div><div class="edu-deg">M.S. Cyber Technology</div><div class="edu-school">University of Maryland Global Campus</div><span class="edu-badge">In Progress</span></div>
+        <div class="edu-right">Expected 2026</div>
+      </div>
+      <div class="edu-item">
+        <div><div class="edu-deg">B.S. Cybersecurity — GPA 3.9</div><div class="edu-school">University of Maryland Global Campus</div></div>
+        <div class="edu-right">2025</div>
+      </div>
+      <div class="edu-item">
+        <div><div class="edu-deg">A.S. Cybersecurity</div><div class="edu-school">Dallas County Community College District (DCCCD)</div></div>
+        <div class="edu-right">2024</div>
+      </div>
+      <div class="edu-item">
+        <div><div class="edu-deg">A.A. Computer Science</div><div class="edu-school">Dallas County Community College District (DCCCD)</div></div>
+        <div class="edu-right">2021</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">contact</div>
+    <p class="prompt-line"><span>~$</span> ./reach_out.sh</p>
+    <div class="contact-row">
+      <a class="contact-btn" href="mailto:Thomas.njimi@gmail.com"><i class="ti ti-mail"></i> Thomas.njimi@gmail.com</a>
+      <a class="contact-btn" href="https://linkedin.com/in/thomas-n-57194193"><i class="ti ti-brand-linkedin"></i> LinkedIn</a>
+      <a class="contact-btn" href="https://aws.amazon.com/verification"><i class="ti ti-external-link"></i> Verify AWS Cert</a>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
