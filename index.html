@@ -34,20 +34,30 @@
   .stat-label{font-size:10px;color:var(--muted);margin-top:2px}
   .exp-list,.proj-list{display:flex;flex-direction:column;gap:10px}
   .exp-card{background:#0c1a0e;border:0.5px solid #1c3a1c;border-left:2px solid var(--green);border-radius:0 6px 6px 0;padding:12px 14px}
-  .proj-card{background:#0c1a0e;border:0.5px solid #1c3a1c;border-left:2px solid #085041;border-radius:0 6px 6px 0;padding:12px 14px;transition:border-color .15s,background .15s}
+  /* PROJECT CARDS - collapsible */
+  .proj-card{background:#0c1a0e;border:0.5px solid #1c3a1c;border-left:2px solid #085041;border-radius:0 6px 6px 0;overflow:hidden;transition:border-color .15s,background .15s}
   .proj-card:hover{border-left-color:var(--green);background:#0e1e10}
   .proj-card.featured{border-left-color:var(--green);border-color:var(--green-dim)}
+  .proj-header{padding:12px 14px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+  .proj-header-left{flex:1}
+  .proj-toggle{color:var(--green);font-size:18px;flex-shrink:0;transition:transform .25s}
+  .proj-card.open .proj-toggle{transform:rotate(45deg)}
+  .proj-body{max-height:0;overflow:hidden;transition:max-height .35s ease,padding .25s}
+  .proj-card.open .proj-body{max-height:600px}
+  .proj-body-inner{padding:0 14px 14px}
+  .proj-divider{height:0.5px;background:#1c3a1c;margin-bottom:12px}
   .exp-title,.proj-title{font-family:'Syne',sans-serif;font-size:14px;color:#c8ffd4;font-weight:700;margin-bottom:2px}
   .exp-company{font-size:11px;color:var(--green);margin-bottom:3px}
   .exp-date{font-size:10px;color:var(--muted);margin-bottom:5px}
   .exp-desc,.proj-desc{font-size:12px;color:#7aaa8a;line-height:1.65}
-  .proj-tags{display:flex;gap:5px;margin-top:8px;flex-wrap:wrap}
+  .proj-tags{display:flex;gap:5px;margin-top:10px;flex-wrap:wrap}
   .proj-tag{font-size:9px;padding:2px 7px;border-radius:3px;background:#0a1e0f;border:0.5px solid #1c3a1c;color:var(--green)}
   .proj-tag.hot{border-color:var(--green);color:var(--green-glow)}
   .phase-row{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:10px}
   .phase-box{background:#051a0a;border:0.5px solid #1c3a1c;border-radius:4px;padding:6px 8px;text-align:center}
   .phase-num{font-size:9px;color:var(--muted);display:block}
   .phase-label{font-size:10px;color:var(--green-glow);display:block;margin-top:2px}
+  .hint{font-size:10px;color:var(--muted);margin-bottom:8px;font-style:italic}
   .skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:8px}
   .skill-card{background:#0c1a0e;border:0.5px solid #1c3a1c;border-radius:6px;padding:11px 13px}
   .skill-category{font-size:10px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px}
@@ -147,50 +157,136 @@
   <div class="section">
     <div class="section-label">projects</div>
     <p class="prompt-line"><span>~$</span> ls ./projects/</p>
+    <p class="hint">// click any project to expand details</p>
     <div class="proj-list">
-      <div class="proj-card featured">
-        <div class="proj-title">⚡ Full-Scope Penetration Test — Capstone</div>
-        <div class="proj-desc">Executed a complete, professionally documented penetration test across four structured phases for ITSY-2372 capstone. Applied industry-standard methodology from scoping through reporting — covering recon, service enumeration, vulnerability validation, and exploitation with ethical guidelines.</div>
-        <div class="phase-row">
-          <div class="phase-box"><span class="phase-num">Phase 1</span><span class="phase-label">Recon</span></div>
-          <div class="phase-box"><span class="phase-num">Phase 2</span><span class="phase-label">Enumeration</span></div>
-          <div class="phase-box"><span class="phase-num">Phase 3</span><span class="phase-label">Exploitation</span></div>
-          <div class="phase-box"><span class="phase-num">Phase 4</span><span class="phase-label">Reporting</span></div>
+
+      <div class="proj-card featured" onclick="toggleProject(this)">
+        <div class="proj-header">
+          <div class="proj-header-left">
+            <div class="proj-title">⚡ Full-Scope Penetration Test — Capstone</div>
+            <div style="font-size:11px;color:var(--muted);margin-top:2px">ITSY-2372 · Kali Linux · 4-Phase Methodology</div>
+          </div>
+          <span class="proj-toggle">+</span>
         </div>
-        <div class="proj-tags" style="margin-top:10px">
-          <span class="proj-tag hot">Nmap</span><span class="proj-tag hot">Nikto</span><span class="proj-tag hot">enum4linux</span><span class="proj-tag hot">Dirb</span><span class="proj-tag hot">SSH Enum</span><span class="proj-tag hot">Kali Linux</span><span class="proj-tag hot">Pentest Report</span><span class="proj-tag hot">Risk Assessment</span>
+        <div class="proj-body">
+          <div class="proj-body-inner">
+            <div class="proj-divider"></div>
+            <div class="proj-desc">Executed a complete, professionally documented penetration test across four structured phases. Applied industry-standard methodology from scoping through reporting — covering recon, service enumeration, vulnerability validation, and exploitation with ethical guidelines.</div>
+            <div class="phase-row">
+              <div class="phase-box"><span class="phase-num">Phase 1</span><span class="phase-label">Recon</span></div>
+              <div class="phase-box"><span class="phase-num">Phase 2</span><span class="phase-label">Enumeration</span></div>
+              <div class="phase-box"><span class="phase-num">Phase 3</span><span class="phase-label">Exploitation</span></div>
+              <div class="phase-box"><span class="phase-num">Phase 4</span><span class="phase-label">Reporting</span></div>
+            </div>
+            <div class="proj-tags">
+              <span class="proj-tag hot">Nmap</span><span class="proj-tag hot">Nikto</span><span class="proj-tag hot">enum4linux</span><span class="proj-tag hot">Dirb</span><span class="proj-tag hot">SSH Enum</span><span class="proj-tag hot">Kali Linux</span><span class="proj-tag hot">Pentest Report</span><span class="proj-tag hot">Risk Assessment</span>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="proj-card">
-        <div class="proj-title">APT Simulation &amp; Network Forensics</div>
-        <div class="proj-desc">Captured and analyzed live network traffic to identify C2 beaconing, SMTP-based data exfiltration, and IOCs consistent with an Advanced Persistent Threat. Identified compromised host (192.168.1.96) and documented full attack timeline.</div>
-        <div class="proj-tags"><span class="proj-tag">Wireshark</span><span class="proj-tag">APT</span><span class="proj-tag">C2 Detection</span><span class="proj-tag">SMTP Exfil</span><span class="proj-tag">IOC Analysis</span></div>
+
+      <div class="proj-card" onclick="toggleProject(this)">
+        <div class="proj-header">
+          <div class="proj-header-left">
+            <div class="proj-title">APT Simulation &amp; Network Forensics</div>
+            <div style="font-size:11px;color:var(--muted);margin-top:2px">Wireshark · C2 Detection · IOC Analysis</div>
+          </div>
+          <span class="proj-toggle">+</span>
+        </div>
+        <div class="proj-body">
+          <div class="proj-body-inner">
+            <div class="proj-divider"></div>
+            <div class="proj-desc">Captured and analyzed live network traffic to identify C2 beaconing, SMTP-based data exfiltration, and IOCs consistent with an Advanced Persistent Threat. Identified compromised host (192.168.1.96) and documented full attack timeline including initial access vector, lateral movement, and exfiltration channel.</div>
+            <div class="proj-tags"><span class="proj-tag">Wireshark</span><span class="proj-tag">APT</span><span class="proj-tag">C2 Detection</span><span class="proj-tag">SMTP Exfil</span><span class="proj-tag">IOC Analysis</span><span class="proj-tag">Network Forensics</span></div>
+          </div>
+        </div>
       </div>
-      <div class="proj-card">
-        <div class="proj-title">Host-Based Monitoring &amp; Packet Analysis</div>
-        <div class="proj-desc">Performed host-based monitoring and deep packet inspection on TCP/TLS and QUIC traffic. Analyzed RDP sessions, DNS queries, and encrypted comms to distinguish normal activity from anomalous IOCs.</div>
-        <div class="proj-tags"><span class="proj-tag">Wireshark</span><span class="proj-tag">TLS/QUIC</span><span class="proj-tag">RDP</span><span class="proj-tag">DNS</span><span class="proj-tag">Host Monitoring</span></div>
+
+      <div class="proj-card" onclick="toggleProject(this)">
+        <div class="proj-header">
+          <div class="proj-header-left">
+            <div class="proj-title">Host-Based Monitoring &amp; Packet Analysis</div>
+            <div style="font-size:11px;color:var(--muted);margin-top:2px">TLS/QUIC · RDP · DNS · Deep Packet Inspection</div>
+          </div>
+          <span class="proj-toggle">+</span>
+        </div>
+        <div class="proj-body">
+          <div class="proj-body-inner">
+            <div class="proj-divider"></div>
+            <div class="proj-desc">Performed host-based monitoring and deep packet inspection on TCP/TLS and QUIC traffic. Analyzed RDP sessions, DNS queries, and encrypted communications to distinguish normal activity from anomalous IOCs. Documented findings in a structured security report.</div>
+            <div class="proj-tags"><span class="proj-tag">Wireshark</span><span class="proj-tag">TLS/QUIC</span><span class="proj-tag">RDP</span><span class="proj-tag">DNS</span><span class="proj-tag">Host Monitoring</span><span class="proj-tag">Packet Analysis</span></div>
+          </div>
+        </div>
       </div>
-      <div class="proj-card">
-        <div class="proj-title">Cyber Kill Chain — BioGenX Breach Analysis</div>
-        <div class="proj-desc">Mapped a simulated enterprise breach to the Lockheed Martin Cyber Kill Chain. Analyzed spear-phishing delivery, lateral movement, and persistence. Produced a structured incident report with remediation recommendations.</div>
-        <div class="proj-tags"><span class="proj-tag">Kill Chain</span><span class="proj-tag">Threat Analysis</span><span class="proj-tag">Spear-Phishing</span><span class="proj-tag">MITRE ATT&amp;CK</span></div>
+
+      <div class="proj-card" onclick="toggleProject(this)">
+        <div class="proj-header">
+          <div class="proj-header-left">
+            <div class="proj-title">Cyber Kill Chain — BioGenX Breach Analysis</div>
+            <div style="font-size:11px;color:var(--muted);margin-top:2px">MITRE ATT&amp;CK · Threat Analysis · Incident Report</div>
+          </div>
+          <span class="proj-toggle">+</span>
+        </div>
+        <div class="proj-body">
+          <div class="proj-body-inner">
+            <div class="proj-divider"></div>
+            <div class="proj-desc">Mapped a simulated enterprise breach to the Lockheed Martin Cyber Kill Chain. Analyzed spear-phishing delivery, lateral movement, and persistence techniques across a fictional biotech company network. Produced a structured incident report with remediation recommendations aligned to MITRE ATT&amp;CK framework.</div>
+            <div class="proj-tags"><span class="proj-tag">Kill Chain</span><span class="proj-tag">Threat Analysis</span><span class="proj-tag">Spear-Phishing</span><span class="proj-tag">MITRE ATT&amp;CK</span><span class="proj-tag">Incident Report</span></div>
+          </div>
+        </div>
       </div>
-      <div class="proj-card">
-        <div class="proj-title">Systems Hardening Plan — CISO Simulation</div>
-        <div class="proj-desc">As simulated CISO of BioGenX Corp, developed a full systems hardening strategy for remote manufacturing facilities following a Phantom Phoenix APT attack. Included Group Policy hardening, cyber resilience frameworks, and remote facility controls.</div>
-        <div class="proj-tags"><span class="proj-tag">Group Policy</span><span class="proj-tag">Systems Hardening</span><span class="proj-tag">Cyber Resilience</span><span class="proj-tag">CISO Strategy</span></div>
+
+      <div class="proj-card" onclick="toggleProject(this)">
+        <div class="proj-header">
+          <div class="proj-header-left">
+            <div class="proj-title">Systems Hardening Plan — CISO Simulation</div>
+            <div style="font-size:11px;color:var(--muted);margin-top:2px">Group Policy · Cyber Resilience · APT Response</div>
+          </div>
+          <span class="proj-toggle">+</span>
+        </div>
+        <div class="proj-body">
+          <div class="proj-body-inner">
+            <div class="proj-divider"></div>
+            <div class="proj-desc">As simulated CISO of BioGenX Corp, developed a full systems hardening strategy for remote manufacturing facilities following a Phantom Phoenix APT attack. Included Group Policy hardening, cyber resilience frameworks, patch management procedures, and remote facility security controls.</div>
+            <div class="proj-tags"><span class="proj-tag">Group Policy</span><span class="proj-tag">Systems Hardening</span><span class="proj-tag">Cyber Resilience</span><span class="proj-tag">CISO Strategy</span><span class="proj-tag">Patch Management</span></div>
+          </div>
+        </div>
       </div>
-      <div class="proj-card">
-        <div class="proj-title">XSS Exploitation Lab — Burp Suite</div>
-        <div class="proj-desc">Performed reflected XSS attacks across multiple HTML contexts (body, title, HTML comments, multiline tags) using Burp Suite and FoxyProxy. Demonstrated context-aware payload crafting and URL-encoded script injection.</div>
-        <div class="proj-tags"><span class="proj-tag">Burp Suite</span><span class="proj-tag">XSS</span><span class="proj-tag">Kali Linux</span><span class="proj-tag">Web App Security</span><span class="proj-tag">Offensive</span></div>
+
+      <div class="proj-card" onclick="toggleProject(this)">
+        <div class="proj-header">
+          <div class="proj-header-left">
+            <div class="proj-title">XSS Exploitation Lab — Burp Suite</div>
+            <div style="font-size:11px;color:var(--muted);margin-top:2px">Kali Linux · Reflected XSS · Web App Security</div>
+          </div>
+          <span class="proj-toggle">+</span>
+        </div>
+        <div class="proj-body">
+          <div class="proj-body-inner">
+            <div class="proj-divider"></div>
+            <div class="proj-desc">Performed reflected XSS attacks across multiple HTML contexts (body, title, HTML comments, multiline tags) using Burp Suite and FoxyProxy on the Public Firing Range web app. Demonstrated context-aware payload crafting, URL-encoded script injection, and SVG-based filter bypass techniques.</div>
+            <div class="proj-tags"><span class="proj-tag">Burp Suite</span><span class="proj-tag">XSS</span><span class="proj-tag">Kali Linux</span><span class="proj-tag">FoxyProxy</span><span class="proj-tag">Web App Security</span><span class="proj-tag">Filter Bypass</span></div>
+          </div>
+        </div>
       </div>
-      <div class="proj-card">
-        <div class="proj-title">SDLC Security &amp; Traffic Baseline Study</div>
-        <div class="proj-desc">Captured network traffic during normal and simulated attack scenarios to establish a security baseline aligned with SDLC documentation requirements. Analyzed RDP, DNS, OCSP, and Azure VM agent traffic patterns.</div>
-        <div class="proj-tags"><span class="proj-tag">SDLC</span><span class="proj-tag">Wireshark</span><span class="proj-tag">RDP</span><span class="proj-tag">Azure</span><span class="proj-tag">Baseline Analysis</span></div>
+
+      <div class="proj-card" onclick="toggleProject(this)">
+        <div class="proj-header">
+          <div class="proj-header-left">
+            <div class="proj-title">SDLC Security &amp; Traffic Baseline Study</div>
+            <div style="font-size:11px;color:var(--muted);margin-top:2px">SDLC · Wireshark · Azure · Baseline Analysis</div>
+          </div>
+          <span class="proj-toggle">+</span>
+        </div>
+        <div class="proj-body">
+          <div class="proj-body-inner">
+            <div class="proj-divider"></div>
+            <div class="proj-desc">Captured network traffic during normal and simulated attack scenarios to establish a security baseline aligned with SDLC documentation requirements. Analyzed RDP, DNS, OCSP, and Azure VM agent traffic patterns to differentiate expected behavior from anomalous activity.</div>
+            <div class="proj-tags"><span class="proj-tag">SDLC</span><span class="proj-tag">Wireshark</span><span class="proj-tag">RDP</span><span class="proj-tag">Azure</span><span class="proj-tag">Baseline Analysis</span><span class="proj-tag">OCSP</span></div>
+          </div>
+        </div>
       </div>
+
     </div>
   </div>
 
@@ -254,5 +350,16 @@
   </div>
 
 </div>
+
+<script>
+  function toggleProject(card) {
+    const isOpen = card.classList.contains('open');
+    // close all
+    document.querySelectorAll('.proj-card').forEach(c => c.classList.remove('open'));
+    // open clicked if it wasn't already open
+    if (!isOpen) card.classList.add('open');
+  }
+</script>
+
 </body>
 </html>
